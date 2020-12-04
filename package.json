@@ -1,0 +1,23 @@
+{
+  "name": "homogeneous-transformations",
+  "version": "1.0.0",
+  "description": "transforms for position and orientation",
+  "main": "mcht.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeterTadich/homogeneous-transformations.git"
+  },
+  "author": "Peter Tadich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PeterTadich/homogeneous-transformations/issues"
+  },
+  "homepage": "https://github.com/PeterTadich/homogeneous-transformations#readme",
+  "dependencies": {
+    "elementary-rotations": "git+https://github.com/PeterTadich/elementary-rotations.git",
+    "matrix-computations": "git+https://github.com/PeterTadich/matrix-computations.git"
+  }
+}
