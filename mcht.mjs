@@ -18,7 +18,7 @@ function transl(x,y,z){
 
 //rotation about X axis (radians)
 function trotx(theta){
-    var Rx = Rx_elementary(theta);
+    var Rx = mcer.Rx_elementary(theta);
     var T = [
         [Rx[0][0], Rx[0][1], Rx[0][2], 0.0],
         [Rx[1][0], Rx[1][1], Rx[1][2], 0.0],
@@ -31,7 +31,7 @@ function trotx(theta){
 
 //rotation about Y axis (radians)
 function troty(theta){
-    var Ry = Ry_elementary(theta);
+    var Ry = mcer.Ry_elementary(theta);
     var T = [
         [Ry[0][0], Ry[0][1], Ry[0][2], 0.0],
         [Ry[1][0], Ry[1][1], Ry[1][2], 0.0],
@@ -44,7 +44,7 @@ function troty(theta){
 
 //rotation about Z axis (radians)
 function trotz(theta){
-    var Rz = Rz_elementary(theta);
+    var Rz = mcer.Rz_elementary(theta);
     var T = [
         [Rz[0][0], Rz[0][1], Rz[0][2], 0.0],
         [Rz[1][0], Rz[1][1], Rz[1][2], 0.0],
@@ -78,7 +78,7 @@ T = [
 ]
 */
 function rpy2tr(roll, pitch, yaw){
-    var Rrpy = rpy2r(roll, pitch, yaw);
+    var Rrpy = mcer.rpy2r(roll, pitch, yaw);
     var T = [
         [Rrpy[0][0], Rrpy[0][1], Rrpy[0][2], 0.0],
         [Rrpy[1][0], Rrpy[1][1], Rrpy[1][2], 0.0],
