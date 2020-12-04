@@ -34,16 +34,34 @@ import * as mcht from './mcht.mjs';
 Copy the following code to index.mjs
 
 ```js
-import * as mcht from 'pseudo-inverse';
+import * as mcht from 'homogeneous-transformations';
+import * as hlao from 'matrix-computations';
 
-var a = [
-    [1,2],
-    [3,4],
-    [5,6],
-    [7,8]
-];
-var b = mcht.mcht(a);
-console.log(b);
+var T0 = hlao.matrix_multiplication(
+                hlao.matrix_multiplication(
+                    hlao.matrix_multiplication(
+                        mcht.transl(1,2,3),
+                        mcht.trotx(1)
+                    ),
+                    mcht.troty(1)
+                ),
+                mcht.trotz(1)
+            );
+var T1 = hlao.matrix_multiplication(
+                hlao.matrix_multiplication(
+                        hlao.matrix_multiplication(
+                            hlao.matrix_multiplication(
+                                T0,
+                                mcht.transl(0.01,0.02,0.03)
+                            ),
+                            mcht.trotx(0.001)
+                        ),
+                        mcht.troty(0.002)
+                    ),
+                mcht.trotz(0.003)
+            );
+var d = mcht.tr2delta(T0,T1);
+console.log(d);
 ```
 
 Then run:
@@ -75,9 +93,11 @@ Returns:
 
 ```js
 [
-  [ -1.0000,  0.8500 ],
-  [ -0.5000,  0.4500 ],
-  [  0.0000,  0.0500 ],
-  [  0.5000, -0.3500 ]
+  [ 0.0191],
+  [-0.0113],
+  [ 0.0301],
+  [ 0.0019],
+  [-0.0011],
+  [ 0.0030]
 ]
 ```
