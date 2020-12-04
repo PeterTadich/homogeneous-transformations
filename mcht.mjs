@@ -325,7 +325,7 @@ function infinitesimalRotation(R0,R1){
     var R0T = hlao.matrix_transpose(R0); //R0 transpose
     var I33 = hlao.identity_matrix(3);
     
-    return vex(
+    return hlao.vex(
         hlao.matrix_arithmetic(
             hlao.matrix_multiplication(R1,R0T),
             I33,
