@@ -2,8 +2,11 @@
 
 //ECMAScript module
 
+//npm install https://github.com/PeterTadich/elementary-rotations https://github.com/PeterTadich/quaternions https://github.com/PeterTadich/matrix-computations#main 
+
 import * as hlao from 'matrix-computations';
 import * as mcer from 'elementary-rotations';
+import * as mcqt from 'quaternions';
 
 function transl(x,y,z){
     var T = [
@@ -87,6 +90,44 @@ function rpy2tr(roll, pitch, yaw){
     ];
     
     return T;
+}
+
+function trinterp(T0,T1,t){
+    //rotation
+    //   - extract rotation matrix
+    var R0 = [
+        [T0[0][0],T0[0][1],T0[0][2]],
+        [T0[1][0],T0[1][1],T0[1][2]],
+        [T0[2][0],T0[2][1],T0[2][2]]
+    ];
+    var R1 = [
+        [T1[0][0],T1[0][1],T1[0][2]],
+        [T1[1][0],T1[1][1],T1[1][2]],
+        [T1[2][0],T1[2][1],T1[2][2]]
+    ];
+    //   - convert to quaternions
+    var q0 = mcqt.unitQuaternionFromRotationMatrix(R0);
+    var q1 = mcqt.unitQuaternionFromRotationMatrix(R1);
+    //   - interpolate
+    var q = mcqt.quaternionSlerp(q0,q1,t);
+    //   - convert to rotation matrix
+    var R = mcqt.rotationMatrixFromUnitQuaternion(q);
+
+    //translation
+    //   - extract position
+    var p0 = [[T0[0][3]],[T0[1][3]],[T0[2][3]]];
+    var p1 = [[T1[0][3]],[T1[1][3]],[T1[2][3]]];
+    //   - interpolate
+    var p = p0*(1-t) + t*p1;
+    
+    //build the homogenous transform
+    var T = [
+        [R[0][0],R[0][1],R[0][2],p[0][0]],
+        [R[1][0],R[1][1],R[1][2],p[1][0]],
+        [R[2][0],R[2][1],R[2][2],p[2][0]],
+        [    0.0,    0.0,    0.0,    1.0]
+    ];
+    return(T);
 }
 
 //convert:
