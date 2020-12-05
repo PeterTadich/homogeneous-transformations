@@ -101,3 +101,48 @@ Returns:
   [ 0.0030]
 ]
 ```
+
+## Examples (extended)
+
+Cartesian Motion: linear translation and spherical rotation (slerp) interpolation - trinterp().
+
+```bash
+npm install https://github.com/PeterTadich/trajectories https://github.com/PeterTadich/homogeneous-transformations
+```
+
+```js
+import * as hlao from 'matrix-computations';
+import * as mcht from 'homogeneous-transformations';
+import * as mcer from 'elementary-rotations';
+import * as mcqt from 'quaternions';
+import * as ttvm from 'trajectories';
+
+//create homogeneous transformations
+var T0 = mcht.trotx(Math.PI);
+var T1 = hlao.matrix_multiplication(
+            mcht.troty(Math.PI/2.0),
+            mcht.trotz(-1.0*Math.PI/2.0)
+        );
+
+//setup time-step
+var qi = 0.0; var qf = 1.0; var tf = 1.0; var nsteps = 100; 
+var s = traj.lspb(qi,qf,tf,nsteps);
+
+//run interpolation 'trinterp()'
+var T = [];
+for(var i=0;i<s.length;i=i+1){
+    T.push(mcht.trinterp(T0,T1,s[i][1]));
+    if((s[i][1] > 0.495)&&(s[i][1] < 0.505)) console.log(T[i]);
+}
+```
+
+Returns:
+
+```js
+//at time-step 0.5
+[
+  [ 0.0,  1.0,  0.0],
+  [ 0.0,  0.0, -1.0],
+  [-1.0,  0.0,  0.0]
+]
+```
