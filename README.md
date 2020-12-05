@@ -124,7 +124,7 @@ var T1 = hlao.matrix_multiplication(
             mcht.trotz(-1.0*Math.PI/2.0)
         );
 
-//setup time-step
+//setup time-steps
 var qi = 0.0; var qf = 1.0; var tf = 1.0; var nsteps = 100; 
 var s = traj.lspb(qi,qf,tf,nsteps);
 
