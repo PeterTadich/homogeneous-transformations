@@ -413,6 +413,7 @@ export {
     troty,
     trotz,
     rpy2tr,
+    trinterp,
     CTdIF,
     Aij,
     HTInverse,
