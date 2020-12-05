@@ -118,7 +118,11 @@ function trinterp(T0,T1,t){
     var p0 = [[T0[0][3]],[T0[1][3]],[T0[2][3]]];
     var p1 = [[T1[0][3]],[T1[1][3]],[T1[2][3]]];
     //   - interpolate
-    var p = p0*(1-t) + t*p1;
+    var p = hlao.matrix_arithmetic(
+                hlao.vector_multiplication_scalar(p0,(1-t)),
+                hlao.vector_multiplication_scalar(p1,t),
+                '+'
+            );
     
     //build the homogenous transform
     var T = [
