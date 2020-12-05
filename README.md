@@ -1,5 +1,5 @@
 # homogeneous-transformations
-homogeneous transformations - position/orientation
+Homogeneous transformations - position/orientation
 
 ## Installation
 
