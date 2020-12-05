@@ -126,7 +126,7 @@ var T1 = hlao.matrix_multiplication(
 
 //setup time-steps
 var qi = 0.0; var qf = 1.0; var tf = 1.0; var nsteps = 100; 
-var s = traj.lspb(qi,qf,tf,nsteps);
+var s = ttvm.lspb(qi,qf,tf,nsteps);
 
 //run interpolation 'trinterp()'
 var T = [];
@@ -141,8 +141,9 @@ Returns:
 ```js
 //at time-step 0.5
 [
-  [ 0.0,  1.0,  0.0],
-  [ 0.0,  0.0, -1.0],
-  [-1.0,  0.0,  0.0]
+  [ 0.0,  1.0,  0.0,  0.0],
+  [ 0.0,  0.0, -1.0,  0.0],
+  [-1.0,  0.0,  0.0,  0.0],
+  [ 0.0,  0.0,  0.0,  1.0],
 ]
 ```
