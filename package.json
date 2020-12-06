@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/PeterTadich/homogeneous-transformations/issues"
   },
-  "homepage": "https://github.com/PeterTadich/homogeneous-transformations#readme"
+  "homepage": "https://github.com/PeterTadich/homogeneous-transformations#readme",
+  "dependencies": {
+    "elementary-rotations": "git+https://github.com/PeterTadich/elementary-rotations.git",
+    "matrix-computations": "git+https://github.com/PeterTadich/matrix-computations.git",
+    "quaternions": "git+https://github.com/PeterTadich/quaternions.git"
+  }
 }
