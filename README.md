@@ -1,6 +1,16 @@
 # homogeneous-transformations
 Homogeneous transformations - position/orientation
 
+## Dependencies
+
+There is 3 dependency 'matrix-computations', 'elementary-rotations' and 'quaternions'.
+
+```bash
+https://github.com/PeterTadich/matrix-computations
+https://github.com/PeterTadich/elementary-rotations
+https://github.com/PeterTadich/quaternions
+```
+
 ## Installation
 
 ### Node.js
