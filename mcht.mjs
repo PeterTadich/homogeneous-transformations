@@ -379,6 +379,66 @@ function infinitesimalRotation(R0,R1){
         );
 }
 
+//Deep copy of the Denavit-Hartenberg parameters.
+//ref: DenavitHartenberg.js
+function DHDeepCopy(DH){
+    //[ai, alpha_i, di, vi]
+    var DHcopy = []
+    for(var i=0;i<DH.length;i=i+1){
+        DHcopy[i] = [];
+        for(var j=0;j<DH[i].length;j=j+1){
+            DHcopy[i][j] = DH[i][j];
+        }
+    }
+    return DHcopy;
+}
+
+//ref: DenavitHartenberg.js
+function directKinematicsDH(Li){
+    var debug = 1;
+
+    // compute the direct kinematic function Tb,e(q) using Denavit-Hartenberg parameters
+    // REF: Robotics Modelling, Planning and Control, Page 64
+    var EPS = 0.001;
+
+    var Tb0 = hlao.identity_matrix(4); //transforms a vector from frame {0} to frame {b} (base frame)
+    var Tne = [ //transforms a vector from frame {e} (end-effector) to frame {n} (link n)
+        [ 0.0, 0.0, 1.0, 0.0],
+        [ 0.0, 1.0, 0.0, 0.0],
+        [-1.0, 0.0, 0.0, 0.0],
+        [ 0.0, 0.0, 0.0, 1.0]
+    ];
+    
+    //for(var i=0;i<Li.length;i=i+1){
+    //    if(i == 0) var T0n = matrix_multiplication(Tb0,Aij(Li[i]));
+    //    if((0 < i)&&(i < (Li.length - 1))) T0n = matrix_multiplication(T0n,Aij(Li[i]));
+    //    if(i == (Li.length - 1)) T0n = matrix_multiplication(T0n,Tne);
+    //}
+    
+    for(var i=0;i<Li.length;i=i+1){
+        if(i == 0) var T0n = Aij(Li[i]);
+        else T0n = hlao.matrix_multiplication(T0n,Aij(Li[i])); //Aij - transforms a vector from frame {j} to frame {i}
+    }                                                          //T0n - transforms a vector from frame {n} (link n) to frame {0} (link 0)
+    
+    /*
+    //check: three link planar arm only
+    var T0nc = threeLinkPlanarArm(Li);
+    
+    if(debug) console.log(T0n);
+    if(debug) console.log(T0nc);
+    
+    for(var i=0;i<4;i=i+1){
+        for(var j=0;j<4;j=j+1){
+            assert((Math.abs(Math.abs(T0n[i][j]) - Math.abs(T0nc[i][j])) < EPS),'Assertion failed: coordinate ttransform error, directKinematicsDH().' + i + ':' + + j);
+        }
+    }
+    */
+    
+    var Tbe = hlao.matrix_multiplication(hlao.matrix_multiplication(Tb0,T0n),Tne);
+    
+    return T0n;
+}
+
 //see also: I:\code\spatial_v2\js\elementaryRotations\elementaryRotations.js
 function print_homogenous_transform(T,x){
     //print the homogenous matrix
@@ -425,5 +485,7 @@ export {
     tr2delta,
     delta2tr,
     infinitesimalRotation,
+    DHDeepCopy,
+    directKinematicsDH,
     print_homogenous_transform
 };
