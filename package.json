@@ -1,8 +1,8 @@
 {
   "name": "homogeneous-transformations",
   "version": "1.0.0",
-  "description": "homogeneous transformations - position/orientation",
-  "main": "mcht.js",
+  "description": "Homogeneous transformations - position/orientation",
+  "main": "mcht.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
