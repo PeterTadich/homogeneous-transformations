@@ -193,7 +193,7 @@ function Aij(Li){ //Ai-1,j
     
     for(var i=0;i<4;i=i+1){
         for(var j=0;j<4;j=j+1){
-            assert((Math.abs(Math.abs(Aiqi[i][j]) - Math.abs(Ai_neg1[i][j])) < EPS),'Assertion failed: coordinate transform error, Aij().'); //hlao.mjs ('matrix-computations')
+            hlao.assert((Math.abs(Math.abs(Aiqi[i][j]) - Math.abs(Ai_neg1[i][j])) < EPS),'Assertion failed: coordinate transform error, Aij().'); //hlao.mjs ('matrix-computations')
         }
     }
     
@@ -429,7 +429,7 @@ function directKinematicsDH(Li){
     
     for(var i=0;i<4;i=i+1){
         for(var j=0;j<4;j=j+1){
-            assert((Math.abs(Math.abs(T0n[i][j]) - Math.abs(T0nc[i][j])) < EPS),'Assertion failed: coordinate ttransform error, directKinematicsDH().' + i + ':' + + j);
+            hlao.assert((Math.abs(Math.abs(T0n[i][j]) - Math.abs(T0nc[i][j])) < EPS),'Assertion failed: coordinate ttransform error, directKinematicsDH().' + i + ':' + + j);
         }
     }
     */
