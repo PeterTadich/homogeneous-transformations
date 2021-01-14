@@ -7,6 +7,9 @@
 import * as hlao from 'matrix-computations';
 import * as mcer from 'elementary-rotations';
 import * as mcqt from 'quaternions';
+//import * as hlao from '../matrix-computations/hlao.mjs';
+//import * as mcer from '../elementary-rotations/mcer.mjs';
+//import * as mcqt from '../quaternions/mcqt.mjs';
 
 function transl(x,y,z){
     var T = [
